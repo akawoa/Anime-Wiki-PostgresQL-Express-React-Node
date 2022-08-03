@@ -11,6 +11,9 @@ const NavBar = () => {
         <Link to={"/anime/new"} className="navbar-brand">
           New Anime
         </Link>
+        <Link to={"/genre/new"} className="navbar-brand">
+          New Genre
+        </Link>
       </header>
     </div>
   );

@@ -5,6 +5,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./routes/Home";
 import NewAnime from "./routes/NewAnime";
+import NewGenre from "./routes/NewGenre";
 import AnimeDetailPage from "./routes/AnimeDetailPage";
 import UpdatePage from "./routes/UpdatePage";
 import { AnimeContextProvider } from "./context/AnimeContext";
@@ -19,6 +20,7 @@ const App = () => {
             <Route exact path="/anime/new" component={NewAnime} />
             <Route exact path="/anime/:id/update" component={UpdatePage} />
             <Route exact path="/anime/:id" component={AnimeDetailPage} />
+            <Route exact path="/genre/new" component={NewGenre} />
           </Switch>
         </Router>
       </div>

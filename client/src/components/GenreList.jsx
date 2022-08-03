@@ -1,5 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
+// import RestaurantFinder from "../apis/RestaurantFinder";
+// import { RestaurantsContext } from "../context/RestaurantsContext";
 
 const GenreList = (props) => {
   return (
