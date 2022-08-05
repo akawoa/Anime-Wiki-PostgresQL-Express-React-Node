@@ -49,6 +49,26 @@ app.get("/api/v1/anime/genre", async (req, res) => {
   }
 });
 
+// Get all Anime within a Genre
+app.get("/api/v1/anime/genre/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const genreAnimeData = await db.query(
+      `select * from anime where anime.genre_id = ${id} ORDER BY name ASC;`
+    );
+
+    res.status(200).json({
+      status: "success",
+      results: genreAnimeData.rows.length,
+      data: {
+        anime: genreAnimeData.rows,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`server is up and listening on port ${port}`);

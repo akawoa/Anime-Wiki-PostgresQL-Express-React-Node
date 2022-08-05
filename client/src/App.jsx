@@ -7,6 +7,7 @@ import NewAnime from "./routes/NewAnime";
 import NewGenre from "./routes/NewGenre";
 import AnimeDetailPage from "./routes/AnimeDetailPage";
 import UpdatePage from "./routes/UpdatePage";
+import GenrePage from "./routes/GenrePage";
 import { AnimeContextProvider } from "./context/AnimeContext";
 import { GenresContextProvider } from "./context/GenreContext";
 
@@ -22,6 +23,7 @@ const App = () => {
             <Route exact path="/anime/:id/update" component={UpdatePage} />
             <Route exact path="/anime/:id" component={AnimeDetailPage} />
             <Route exact path="/genre/new" component={NewGenre} />
+            <Route exact path="/anime/genre/:id" component={GenrePage} />
           </Switch>
         </Router>
       </div>

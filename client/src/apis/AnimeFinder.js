@@ -9,9 +9,14 @@ export const getAnimeCall = () => {
   return axios.get("http://localhost:3001/api/v1/anime");
 };
 
-// API Axios Get Call for genres
+// API Axios Get Call for Genre
 export const getGenreCall = () => {
   return axios.get("http://localhost:3001/api/v1/anime/genre");
+};
+
+// API Axios Get Call for all anime within a Genre
+export const getAnimeInGenre = (id) => {
+  return axios.get(`http://localhost:3001/api/v1/anime/genre/${id}`);
 };
 // // API Axios Post Call.
 // export const postAPICall = (url, data) => {

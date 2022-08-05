@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { getGenreCall } from "../apis/AnimeFinder";
 import { AnimeContext } from "../context/AnimeContext";
 import { GenresContext } from "../context/GenreContext";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const GenreList = (props) => {
   const { genres, setGenres } = useContext(GenresContext);
@@ -36,8 +36,8 @@ const GenreList = (props) => {
                   key={genre.id}
                   class="table-active"
                 >
-                  <td class="col-md-2 text-center border-light">{genre.genre_name}</td>
-                  <td class="col-md-10 text-center border-light"><img src={genre.genre_image} class="img-fluid rounded p-1 border border-warning bg-warning w-50"></img></td>
+                  <td class="col-md-2 align-middle text-center border-light">{genre.genre_name}</td>
+                  <td class="col-md-10 text-center border-light"><a href={`/anime/genre/${genre.id}`}><img src={genre.genre_image} class="img-fluid rounded p-1 border border-warning bg-warning w-50"></img></a></td>
                 </tr>
               );
             })}
