@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useLocation, useParams, useHistory } from "react-router-dom";
-import AnimeFinder from "../apis/AnimeFinder";
+import { getAPICall } from "../apis/AnimeFinder";
 import { AnimeContext } from "../context/AnimeContext";
 
 const AddGenre = () => {
@@ -9,20 +9,20 @@ const AddGenre = () => {
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("Price Range");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await AnimeFinder.post("/", {
-        name,
-        location,
-        price_range: priceRange,
-      });
-      console.log(response.data.data);
-      addAnime(response.data.data.anime);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await AnimeFinder.post("/", {
+  //       name,
+  //       location,
+  //       price_range: priceRange,
+  //     });
+  //     console.log(response.data.data);
+  //     addAnime(response.data.data.anime);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   return (
     <div class="container-fluid">
   <div class="row">

@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 
 import React from "react";
@@ -9,10 +8,12 @@ import NewGenre from "./routes/NewGenre";
 import AnimeDetailPage from "./routes/AnimeDetailPage";
 import UpdatePage from "./routes/UpdatePage";
 import { AnimeContextProvider } from "./context/AnimeContext";
+import { GenresContextProvider } from "./context/GenreContext";
 
 const App = () => {
   return (
     <AnimeContextProvider>
+      <GenresContextProvider>
       <div className="container">
         <Router>
           <Switch>
@@ -24,6 +25,7 @@ const App = () => {
           </Switch>
         </Router>
       </div>
+      </GenresContextProvider>
     </AnimeContextProvider>
   );
 };

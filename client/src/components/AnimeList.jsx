@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import AnimeFinder from "../apis/AnimeFinder";
+import { getAnimeCall } from "../apis/AnimeFinder";
 import { AnimeContext } from "../context/AnimeContext";
 import { useHistory } from "react-router-dom";
 
@@ -9,25 +9,24 @@ const AnimeList = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await AnimeFinder.get("/");
+        const response = await getAnimeCall();
         console.log(response.data.data);
         setAnime(response.data.data.anime);
       } catch (err) {}
     };
-
     fetchData();
   }, []);
 
   return (
-    <div className="list-group">
+    <div class="list-group container">
         Anime List Component
-        <table className="table table-hover table-dark">
+        <table class="table-active table-bordered table-striped table-hover table-dark table-sm">
         <thead>
-          <tr className="bg-primary">
-            <th scope="col">Name</th>
-            <th scope="col">Number of Episodes</th>
-            <th scope="col">Year</th>
-            <th scope="col">Creator</th>
+          <tr className="bg-secondary text-warning">
+            <th scope="col" class="col-md-3-3 text-center border-light">Image</th>
+            <th scope="col" class="col-md-3-3 text-center border-light">Name</th>
+            <th scope="col" class="col-md-3-3 text-center border-light">Number of Episodes</th>
+            <th scope="col" class="col-md-3-3 text-center border-light">Genre</th>
           </tr>
         </thead>
         <tbody>
@@ -36,14 +35,12 @@ const AnimeList = (props) => {
               return (
                 <tr
                   key={anime.id}
+                  class="table-active"
                 >
-                  <td>{anime.name}</td>
-                  <td>{anime.id}</td>
-                  <td>{"$".repeat(anime.id)}</td>
-                  <td>
-                  </td>
-                  <td>
-                  </td>
+                  <td class="col-md-3 text-center border-light"><img src={anime.image} class="img-fluid rounded h-25 w-75 p-1 border border-warning bg-warning"></img></td>
+                  <td class="col-md-3 text-center border-light">{anime.name}</td>
+                  <td class="col-md-3 text-center border-light">{anime.episodes}</td>
+                  <td class="col-md-3 text-center border-light"> {anime.genre_name}</td>
                 </tr>
               );
             })}

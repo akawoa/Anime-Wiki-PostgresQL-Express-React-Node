@@ -14,13 +14,34 @@ app.use(express.json());
 app.get("/api/v1/anime", async (req, res) => {
   try {
     //const results = await db.query("select * from anime");
-    const animeData = await db.query("select * from anime;");
+    const animeData = await db.query(
+      "select * from anime INNER JOIN genres ON anime.genre_id=genres.id ORDER BY name ASC;"
+    );
 
     res.status(200).json({
       status: "success",
       results: animeData.rows.length,
       data: {
         anime: animeData.rows,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Get all Genres
+app.get("/api/v1/anime/genre", async (req, res) => {
+  try {
+    const genreData = await db.query(
+      "select * from genres ORDER BY genre_name ASC;"
+    );
+
+    res.status(200).json({
+      status: "success",
+      results: genreData.rows.length,
+      data: {
+        genre: genreData.rows,
       },
     });
   } catch (err) {
