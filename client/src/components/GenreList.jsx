@@ -1,12 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
 import { getGenreCall } from "../apis/AnimeFinder";
-import { AnimeContext } from "../context/AnimeContext";
 import { GenresContext } from "../context/GenreContext";
 import { useHistory, Link } from "react-router-dom";
 
 const GenreList = (props) => {
   const { genres, setGenres } = useContext(GenresContext);
-  const { state, setState } = useState([]);
+  const { state, setState } = useState(false);
 
   const fetchData = async () => {
     try {
@@ -18,15 +17,7 @@ const GenreList = (props) => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
-
-//   useEffect(() => {
-//     axios.get("http://localhost:8000/api/authors")
-//         .then(res => setAuthors(res.data))
-//         .catch(err => console.log(err))
-// }, [state])
-
-
+  }, [state]);
 
   return (
     <div class="list-group container">

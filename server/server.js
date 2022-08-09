@@ -30,27 +30,6 @@ app.get("/api/v1/anime", async (req, res) => {
   }
 });
 
-// Get individual Anime
-app.get("/api/v1/anime/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    //const results = await db.query("select * from anime");
-    const animeData = await db.query(
-      `select * from anime WHERE anime.id = ${id};`
-    );
-
-    res.status(200).json({
-      status: "success",
-      results: animeData.rows.length,
-      data: {
-        anime: animeData.rows,
-      },
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
-
 // Get all Genres
 app.get("/api/v1/anime/genre", async (req, res) => {
   try {
@@ -84,6 +63,24 @@ app.get("/api/v1/anime/genre/:id", async (req, res) => {
       results: genreAnimeData.rows.length,
       data: {
         anime: genreAnimeData.rows,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Get a Single Anime By ID
+app.get("/api/v1/anime/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const animeData = await db.query(`select * from anime where id = ${id};`);
+
+    res.status(200).json({
+      status: "success",
+      results: animeData.rows.length,
+      data: {
+        anime: animeData.rows,
       },
     });
   } catch (err) {

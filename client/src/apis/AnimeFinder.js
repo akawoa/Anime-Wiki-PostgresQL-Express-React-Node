@@ -11,7 +11,7 @@ export const getAnimeCall = () => {
 
 // API Axios Get Call for Anime
 export const getSingleAnimeCall = (id) => {
-  return axios.get("http://localhost:3001/api/v1/anime/${id}");
+  return axios.get(`http://localhost:3001/api/v1/anime/${id}`);
 };
 
 // API Axios Get Call for Genre

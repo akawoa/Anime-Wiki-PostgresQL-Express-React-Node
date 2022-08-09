@@ -3,7 +3,7 @@ import { getAnimeInGenre } from "../apis/AnimeFinder";
 import { AnimeContext } from "../context/AnimeContext";
 import { useHistory, useParams, Link } from "react-router-dom";
 
-const AnimeList = (props) => {
+const AllAnimeInGivenGenre = (props) => {
     const { id } = useParams();
   const { anime, setAnime } = useContext(AnimeContext);
   let history = useHistory();
@@ -54,4 +54,4 @@ const AnimeList = (props) => {
   );
 };
 
-export default AnimeList;
+export default AllAnimeInGivenGenre;

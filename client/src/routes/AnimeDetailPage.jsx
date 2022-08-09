@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import AddAnime from "../components/AddAnime";
-import AnimeList from "../components/AnimeList";
+import ShowPage from "../components/ShowPage";
 import NavBar from "../components/NavBar";
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       <NavBar />
       <Header />
-      <AnimeList />
+      <ShowPage />
     </div>
   );
 };
