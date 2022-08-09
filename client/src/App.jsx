@@ -1,7 +1,7 @@
 import "./App.css";
 
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./routes/Home";
 import NewAnime from "./routes/NewAnime";
 import NewGenre from "./routes/NewGenre";
@@ -11,21 +11,31 @@ import GenrePage from "./routes/GenrePage";
 import { AnimeContextProvider } from "./context/AnimeContext";
 import { GenresContextProvider } from "./context/GenreContext";
 
-const App = () => {
+const App = (async) => {
   return (
     <AnimeContextProvider>
       <GenresContextProvider>
       <div className="container">
-        <Router>
+        <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/anime/new" component={NewAnime} />
-            <Route exact path="/anime/:id/update" component={UpdatePage} />
-            <Route exact path="/anime/:id" component={AnimeDetailPage} />
-            <Route exact path="/genre/new" component={NewGenre} />
-            <Route exact path="/anime/genre/:id" component={GenrePage} />
+            <Route exact path="/"><Home /></Route>
+            <Route exact path="/anime/new">
+              <NewAnime />
+            </Route>
+            <Route exact path="/anime/:id/update">
+              <UpdatePage />
+            </Route>
+            <Route exact path="/anime/:id">
+            <AnimeDetailPage />
+            </Route>
+            <Route exact path="/genre/new">
+              <NewGenre />
+            </Route>
+            <Route exact path="/anime/genre/:id">
+              <GenrePage />
+            </Route>
           </Switch>
-        </Router>
+        </BrowserRouter>
       </div>
       </GenresContextProvider>
     </AnimeContextProvider>

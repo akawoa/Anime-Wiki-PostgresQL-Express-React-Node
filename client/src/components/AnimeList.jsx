@@ -1,21 +1,22 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { getAnimeCall } from "../apis/AnimeFinder";
 import { AnimeContext } from "../context/AnimeContext";
 import { useHistory } from "react-router-dom";
 
 const AnimeList = (props) => {
   const { anime, setAnime } = useContext(AnimeContext);
-  let history = useHistory();
+  const { state, setState } = useState(false);
+  const fetchData = async () => {
+    try {
+      const response = await getAnimeCall();
+      console.log(response.data.data.anime);
+      setAnime(response.data.data.anime);
+      setState(response.data.data.anime);
+    } catch (err) {}
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getAnimeCall();
-        console.log(response.data.data);
-        setAnime(response.data.data.anime);
-      } catch (err) {}
-    };
     fetchData();
-  }, []);
+  }, [state]);
 
   return (
     <div class="list-group container">

@@ -15,7 +15,28 @@ app.get("/api/v1/anime", async (req, res) => {
   try {
     //const results = await db.query("select * from anime");
     const animeData = await db.query(
-      "select * from anime INNER JOIN genres ON anime.genre_id=genres.id ORDER BY name ASC;"
+      "select anime.id as id, name as name, episodes as episodes, image as image, year as year, creator as creator, genre_id as genre_id, genre_name as genre_name from anime INNER JOIN genres ON anime.genre_id=genres.id ORDER BY name ASC;"
+    );
+
+    res.status(200).json({
+      status: "success",
+      results: animeData.rows.length,
+      data: {
+        anime: animeData.rows,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Get individual Anime
+app.get("/api/v1/anime/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    //const results = await db.query("select * from anime");
+    const animeData = await db.query(
+      `select * from anime WHERE anime.id = ${id};`
     );
 
     res.status(200).json({
@@ -54,7 +75,8 @@ app.get("/api/v1/anime/genre/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const genreAnimeData = await db.query(
-      `select * from anime where anime.genre_id = ${id} ORDER BY name ASC;`
+      // `select * from anime where anime.genre_id = ${id}  ORDER BY name ASC;`
+      `select * from anime  LEFT JOIN genres ON anime.genre_id = genres.id WHERE anime.genre_id = ${id};`
     );
 
     res.status(200).json({

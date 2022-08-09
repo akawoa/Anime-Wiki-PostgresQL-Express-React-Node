@@ -1,5 +1,5 @@
 import React from "react";
-import {Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const NavBar = () => {
   return (
@@ -13,6 +13,9 @@ const NavBar = () => {
         </Link>
         <Link to={"/genre/new"} className="navbar-brand">
           New Genre
+        </Link>
+        <Link to={"/anime/"} className="navbar-brand">
+          All Anime
         </Link>
       </header>
     </div>
