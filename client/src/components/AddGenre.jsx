@@ -24,18 +24,29 @@ const AddGenre = () => {
   //   }
   // };
   return (
-    <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
+<div className="container-fluid">
+  <h3 className="font-weight-light text-left">
+  Add a Genre
+  </h3>
+  <div className="row">
+    <div className="col-md-12">
       <form role="form">
-        <div class="form-group">
+        <div className="form-group">
             
-<label for="exampleInputEmail1">
+          <label htmlFor="exampleInputEmail1">
             Name
           </label>
-          <input type="text" class="form-control" />
+          <input type="text" className="form-control" />
+          <label htmlFor="exampleInputEmail1">
+            Image
+          </label>
+          <input type="text" className="form-control" />
+          <label htmlFor="exampleInputEmail1">
+            Description
+          </label>
+          <textarea className="form-control" rows="4"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Add Genre
         </button>
       </form>

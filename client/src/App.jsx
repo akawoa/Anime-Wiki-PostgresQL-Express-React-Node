@@ -8,6 +8,7 @@ import NewGenre from "./routes/NewGenre";
 import AnimeDetailPage from "./routes/AnimeDetailPage";
 import UpdatePage from "./routes/UpdatePage";
 import GenrePage from "./routes/GenrePage";
+import AllAnimeList from "./routes/AllAnimeList";
 import { AnimeContextProvider } from "./context/AnimeContext";
 import { GenresContextProvider } from "./context/GenreContext";
 
@@ -19,6 +20,9 @@ const App = (async) => {
         <BrowserRouter>
           <Switch>
             <Route exact path="/"><Home /></Route>
+            <Route exact path="/anime">
+              <AllAnimeList />
+            </Route>
             <Route exact path="/anime/new">
               <NewAnime />
             </Route>

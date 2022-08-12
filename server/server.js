@@ -55,7 +55,8 @@ app.get("/api/v1/anime/genre/:id", async (req, res) => {
   try {
     const genreAnimeData = await db.query(
       // `select * from anime where anime.genre_id = ${id}  ORDER BY name ASC;`
-      `select * from anime  LEFT JOIN genres ON anime.genre_id = genres.id WHERE anime.genre_id = ${id};`
+      `select anime.id as id, name as name, episodes as episodes, image as image, year as year, creator as creator, genre_id as genre_id, genre_name as genre_name from anime LEFT JOIN genres ON anime.genre_id=genres.id WHERE anime.genre_id = ${id} ORDER BY name ASC;`
+      // `select * from anime  LEFT JOIN genres ON anime.genre_id = genres.id WHERE anime.genre_id = ${id};`
     );
 
     res.status(200).json({
