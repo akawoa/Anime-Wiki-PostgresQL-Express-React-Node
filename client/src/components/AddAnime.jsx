@@ -82,6 +82,7 @@ const AddAnime = () => {
                 <div className="form-group">
                 <label htmlFor="exampleFormControlSelect1">Genre</label>
                 <select className="form-control" id="exampleFormControlSelect1">
+                  <option value="" disabled selected hidden>Choose a genre</option>
                 {genres &&
                   genres.map((genre) => {
                   return (
