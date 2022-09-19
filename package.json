@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "start-api": "cd server && npm run start",
+    "start-app": "cd client && npm run start",
+    "dev": "concurrently --kill-others \"npm run start-api\" \"npm run start-app\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "concurrently": "^7.4.0",
+    "react-content-loader": "^6.2.0"
+  },
+  "devDependencies": {
+    "web-vitals": "^3.0.2"
+  }
+}

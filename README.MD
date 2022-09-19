@@ -6,3 +6,5 @@
 # Eventually, the goal is to have this project deployed to github as a portfolio application.
 # This will start small, with wiki options to add anime, tag them to genres, add tags, photos, titles, release dates, related franchises, etc
 # Eventually the project will add login and registration, options to follow / watch db items, and more granular options
+
+# Project may now be run using : 'npm run dev' from the root directory to run both the application as well as the express server concurrently while developing in a singular console window, this does allow nodemon to run for instantly reviewing changes to specific pages

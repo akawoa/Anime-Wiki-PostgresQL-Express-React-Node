@@ -8,6 +8,7 @@ import NewGenre from "./routes/NewGenre";
 import AnimeDetailPage from "./routes/AnimeDetailPage";
 import UpdatePage from "./routes/UpdatePage";
 import GenrePage from "./routes/GenrePage";
+import ErrorPage from "./routes/ErrorPage";
 import AllAnimeList from "./routes/AllAnimeList";
 import { AnimeContextProvider } from "./context/AnimeContext";
 import { GenresContextProvider } from "./context/GenreContext";
@@ -37,6 +38,9 @@ const App = (async) => {
             </Route>
             <Route exact path="/anime/genre/:id">
               <GenrePage />
+            </Route>
+            <Route exact path="/error">
+              <ErrorPage />
             </Route>
           </Switch>
         </BrowserRouter>
