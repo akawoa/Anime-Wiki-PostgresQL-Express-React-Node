@@ -89,6 +89,34 @@ app.get("/api/v1/anime/:id", async (req, res) => {
   }
 });
 
+// Create an Anime
+app.post("/api/v1/anime/new", async (req, res) => {
+  console.log(req.body);
+
+  try {
+    const results = await db.query(
+      "INSERT INTO anime (name, episodes, image, year, creator, genre_id) values ($1, $2, $3, $4, $5, $6) returning *",
+      [
+        req.body.name,
+        req.body.episodes,
+        req.body.image,
+        req.body.year,
+        req.body.creator,
+        req.body.genre_id,
+      ]
+    );
+    console.log(results);
+    res.status(201).json({
+      status: "succes",
+      data: {
+        anime: results.rows[0],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`server is up and listening on port ${port}`);

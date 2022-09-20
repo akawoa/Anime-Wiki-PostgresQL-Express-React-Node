@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS public.genres
     genre_image text,
     genre_description text,
     created_at timestamp with time zone DEFAULT current_timestamp,
-    updated_at timestamp with time zone DEFAULT now() on update now(),
+    updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS public.anime
     year integer,
     creator character varying(255),
     genre_id bigint,
+    description text,
     created_at timestamp with time zone DEFAULT current_timestamp,
     updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
@@ -55,6 +56,7 @@ DROP TABLE IF EXISTS `dojos_and_ninjas`.`dojos` ;
 CREATE TABLE IF NOT EXISTS `dojos_and_ninjas`.`dojos` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `genre_name` VARCHAR(45) NULL,
+  `genre_description` TEXT,
   `created_at` DATETIME NULL default current_timestamp,
   `updated_at` DATETIME NULL default now() on update now(),
   PRIMARY KEY (`id`),
@@ -90,13 +92,13 @@ CREATE TABLE IF NOT EXISTS `dojos_and_ninjas`.`ninjas` (
 -- -----------------------------------------------------
 
 
-INSERT INTO genres(genre_name, genre_image)
-VALUES ('Fantasy','http://www.j1studios.com/wordpress/wp-content/uploads/AoT_S3.jpg'),
-('Action','http://images.gmanews.tv/webpics/2021/01/my_hero_academia_2021_01_26_15_02_29.jpg'),
-('Science Fiction','https://geekculture.co/wp-content/uploads/2018/04/cowboy-bebop-886x500.jpg'),
-('Slice of Life','https://i0.wp.com/www.monstersandcritics.com/wp-content/uploads/2020/04/Fruits-Basket-Season-3-release-date-Fruits-Basket-3rd-Season-Furuba-ending-2021.jpg?resize=780%2C439&ssl=1'),
-('Mecha','https://staticc.sportskeeda.com/editor/2022/03/b090b-16485410205928-1920.jpg'),
-('Romance','https://www.ungeek.ph/wp-content/uploads/2022/08/a_silent_voice_netflix-696x364.jpg');
+INSERT INTO genres(genre_name, genre_image, genre_description)
+VALUES ('Fantasy','http://www.j1studios.com/wordpress/wp-content/uploads/AoT_S3.jpg', 'Fantasy is an encompassing genre that can house everything from medieval magic, swords, dragons, elves, and anything not explicitly rooted in scientific explanations. If the content falls outside of reality and is not explainable with real-world science, chances are it will be here.'),
+('Action','http://images.gmanews.tv/webpics/2021/01/my_hero_academia_2021_01_26_15_02_29.jpg', 'Action favors things happening over extended dialogue or an emphasis on mundane activities. You will not find daily life here, but rather relentless fighting, limitless power levels, and a major emphasis on maximizing strength.'),
+('Science Fiction','https://geekculture.co/wp-content/uploads/2018/04/cowboy-bebop-886x500.jpg', 'Unlike its counterpart in fantasy, this genre emphasizes possibly fantastical advances in technology that can be explained using real-world science. Attention to details such as gravity, atmospheric pressure, and forces apply here. You will not find the power of friendship, probably...'),
+('Slice of Life','https://i0.wp.com/www.monstersandcritics.com/wp-content/uploads/2020/04/Fruits-Basket-Season-3-release-date-Fruits-Basket-3rd-Season-Furuba-ending-2021.jpg?resize=780%2C439&ssl=1', 'Similar to a piece of cake, this genre is typically sweet and calming. It often portrays people going about their delay lives, good or otherwise, and the trials and tribulations of mundanity.'),
+('Mecha','https://staticc.sportskeeda.com/editor/2022/03/b090b-16485410205928-1920.jpg', 'This is all about giant robots fighting things, typically other giant robots, but monsters and armies apply as well.'),
+('Romance','https://www.ungeek.ph/wp-content/uploads/2022/08/a_silent_voice_netflix-696x364.jpg', 'For the love of love, this genre is all about stomach butterflies, sweaty palms, overthinking, and the hedgehog dilemma');
 
 -- -----------------------------------------------------
 -- genres sample update statement
@@ -121,7 +123,7 @@ VALUES ('Gurren Lagann',27,'https://cdn.myanimelist.net/images/anime/7/6425l.jpg
 ('Black Lagoon',29,'https://cdn.myanimelist.net/images/anime/8/75529.jpg',2006,'creator',2),
 ('Attack on Titan',86,'https://cdn.myanimelist.net/images/anime/10/47347.jpg',2013,'creator',1),
 ('Darker Than Black',37,'https://cdn.myanimelist.net/images/anime/5/19570.jpg',2007,'creator',2),
-(`Kobayashi's Dragon Maid`,25,'https://cdn.myanimelist.net/images/anime/5/85434.jpg',2017,'creator',4),
+('Kobayashi Dragon Maid',25,'https://cdn.myanimelist.net/images/anime/5/85434.jpg',2017,'creator',4),
 ('A Silent Voice',1,'https://cdn.myanimelist.net/images/anime/1122/96435.jpg',2016,'creator',6),
 ('Fullmetal Alchemist Brotherhood',64,'https://cdn.myanimelist.net/images/anime/1223/96541.jpg',2009,'creator',1),
 ('My Hero Academia',113,'https://cdn.myanimelist.net/images/anime/10/78745.jpg',2016,'creator',2),

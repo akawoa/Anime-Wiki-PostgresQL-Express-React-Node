@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { getSingleAnimeCall } from "../apis/AnimeFinder";
 import { AnimeContext } from "../context/AnimeContext";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Redirect } from "react-router-dom";
 import MyLoader from "./MyLoader";
 
 const ShowPage = (props) => {
@@ -38,6 +38,7 @@ const ShowPage = (props) => {
   }, [state]);
 
   if (requestStatus === REQUEST_STATUS.LOADING) return <MyLoader></MyLoader>;
+  if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
 
   return (
     <div className="list-group container">

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { getAnimeInGenre } from "../apis/AnimeFinder";
 import { AnimeContext } from "../context/AnimeContext";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useHistory, useParams, Redirect, Link } from "react-router-dom";
 import MyLoader from "./MyLoader";
 
 const AllAnimeInGivenGenre = (props) => {
@@ -30,6 +30,7 @@ const AllAnimeInGivenGenre = (props) => {
   }, []);
 
   if (requestStatus === REQUEST_STATUS.LOADING) return <MyLoader></MyLoader>;
+  if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
 
   return (
     <div className="list-group container">

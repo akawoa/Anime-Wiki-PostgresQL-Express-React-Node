@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { getGenreCall } from "../apis/AnimeFinder";
 import { GenresContext } from "../context/GenreContext";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, Redirect } from "react-router-dom";
 import MyLoader from "./MyLoader";
 
 const GenreList = (props) => {
@@ -30,7 +30,8 @@ const GenreList = (props) => {
   }, [state]);
 
   if (requestStatus === REQUEST_STATUS.LOADING) return <MyLoader></MyLoader>;
-
+  if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
+  
   return (
     <div className="list-group container">
         Genre List Component
@@ -38,6 +39,7 @@ const GenreList = (props) => {
         <thead>
           <tr className="bg-secondary text-warning">
           <th scope="col" className="col-md-4-4 text-center border-light">Name</th>
+          <th scope="col" className="col-md-8-8 text-center border-light">Genre Description</th>
             <th scope="col" className="col-md-8-8 text-center border-light">Genre Image</th>
           </tr>
         </thead>
@@ -49,8 +51,9 @@ const GenreList = (props) => {
                   key={genre.id}
                   className="table-active"
                 >
-                  <td className="col-md-2 align-middle text-center border-light">{genre.genre_name}</td>
-                  <td className="col-md-10 text-center border-light"><Link to={`/anime/genre/${genre.id}`}><img src={genre.genre_image} className="img-fluid rounded p-1 border border-warning bg-warning w-50"></img></Link></td>
+                  <td className="col-md-1 align-middle text-center border-light">{genre.genre_name}</td>
+                  <td className="col-md-3 align-middle text-center border-light">{genre.genre_description}</td>
+                  <td className="col-md-8 text-center border-light"><Link to={`/anime/genre/${genre.id}`}><img src={genre.genre_image} className="img-fluid rounded p-1 border border-warning bg-warning w-50"></img></Link></td>
                 </tr>
               );
             })}
