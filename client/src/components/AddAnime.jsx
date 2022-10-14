@@ -83,7 +83,6 @@ const handleSubmit = async (e) => {
     console.log(response.status);
     addAnime(response.data.data.anime);
     if(response.status === 201) {
-      console.log('The response is equal to 201');
       history.push("/anime")
     }
   } catch (err) {

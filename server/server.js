@@ -117,6 +117,7 @@ app.post("/api/v1/anime/new", async (req, res) => {
   }
 });
 
+//Delete an Anime
 app.delete("/api/v1/anime/:id", async (req, res) => {
   const { id } = req.params;
   console.log("req is equal to :" + req);
@@ -127,6 +128,42 @@ app.delete("/api/v1/anime/:id", async (req, res) => {
       status: "sucess",
     });
     console.log("success status achieved!?");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+//Delete a Genre
+app.delete("/api/v1/genre/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log("req is equal to :" + req);
+  try {
+    const results = await db.query(`DELETE FROM genres where id = ${id};`);
+    // const results = await db.query("DELETE FROM anime where id = $1", [id]);
+    res.status(204).json({
+      status: "sucess",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Create a Genre
+app.post("/api/v1/genre/new", async (req, res) => {
+  console.log(req.body);
+
+  try {
+    const results = await db.query(
+      "INSERT INTO genres (genre_name, genre_image, genre_description) values ($1, $2, $3) returning *",
+      [req.body.genre_name, req.body.genre_image, req.body.genre_description]
+    );
+    console.log(results);
+    res.status(201).json({
+      status: "success",
+      data: {
+        genre: results.rows[0],
+      },
+    });
   } catch (err) {
     console.log(err);
   }
