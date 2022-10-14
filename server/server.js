@@ -107,11 +107,26 @@ app.post("/api/v1/anime/new", async (req, res) => {
     );
     console.log(results);
     res.status(201).json({
-      status: "succes",
+      status: "success",
       data: {
         anime: results.rows[0],
       },
     });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.delete("/api/v1/anime/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log("req is equal to :" + req);
+  try {
+    const results = await db.query(`DELETE FROM anime where id = ${id};`);
+    // const results = await db.query("DELETE FROM anime where id = $1", [id]);
+    res.status(204).json({
+      status: "sucess",
+    });
+    console.log("success status achieved!?");
   } catch (err) {
     console.log(err);
   }

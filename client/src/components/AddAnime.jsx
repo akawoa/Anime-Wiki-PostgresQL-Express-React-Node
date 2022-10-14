@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useLocation, useParams, useHistory, Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import AnimeFinder, { getGenreCall, postAnimeAPICall } from "../apis/AnimeFinder";
 import { AnimeContext } from "../context/AnimeContext";
 import { GenresContext } from "../context/GenreContext";
@@ -14,6 +14,8 @@ const AddAnime = () => {
   const [genreID, setGenreID] = useState();
   const { genres, setGenres } = useContext(GenresContext);
   const { state, setState } = useState(false);
+  const { response, setResponse } = useState();
+  const history = useHistory() 
 
   const fetchData = async () => {
     try {
@@ -78,8 +80,12 @@ const handleSubmit = async (e) => {
       genre_id: genreID
     });
     console.log(response.data.data);
+    console.log(response.status);
     addAnime(response.data.data.anime);
-    <Redirect to="/anime" />
+    if(response.status === 201) {
+      console.log('The response is equal to 201');
+      history.push("/anime")
+    }
   } catch (err) {
     console.log(err);
     <Redirect to="/error" />

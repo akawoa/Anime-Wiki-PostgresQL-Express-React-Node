@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { getAnimeCall } from "../apis/AnimeFinder";
+import { getAnimeCall, deleteAnimeCall } from "../apis/AnimeFinder";
 import { AnimeContext } from "../context/AnimeContext";
 import { useHistory, Link, Redirect } from "react-router-dom";
 import MyLoader from "./MyLoader";
@@ -26,6 +26,42 @@ const AnimeList = (props) => {
     fetchData();
   }, [state]);
 
+  const deleteHandler = async (id) => {
+  try {
+    const response = await deleteAnimeCall(id)
+    console.log(response.status);
+    fetchData();
+  } catch (err) {
+    console.log(err);
+    <Redirect to="/error" />
+  }
+}
+
+
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   try {
+//     const response = await postAnimeAPICall({
+//       name,
+//       episodes,
+//       image,
+//       year,
+//       creator,
+//       genre_id: genreID
+//     });
+//     console.log(response.data.data);
+//     console.log(response.status);
+//     addAnime(response.data.data.anime);
+//     if(response.status === 201) {
+//       console.log('The response is equal to 201');
+//       history.push("/anime")
+//     }
+//   } catch (err) {
+//     console.log(err);
+//     <Redirect to="/error" />
+//   }
+// };
+
   if (requestStatus === REQUEST_STATUS.LOADING) return <MyLoader></MyLoader>;
   if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
 
@@ -39,6 +75,7 @@ const AnimeList = (props) => {
             <th scope="col" className="col-md-3-3 text-center border-light">Name</th>
             <th scope="col" className="col-md-3-3 text-center border-light">Number of Episodes</th>
             <th scope="col" className="col-md-3-3 text-center border-light">Genre</th>
+            <th scope="col" className="col-md-3-3 text-center border-light">Action(s)</th>
           </tr>
         </thead>
         <tbody>
@@ -53,6 +90,7 @@ const AnimeList = (props) => {
                   <td className="col-md-3 text-center border-light">{anime.name}</td>
                   <td className="col-md-3 text-center border-light">{anime.episodes}</td>
                   <td className="col-md-3 text-center border-light"> {anime.genre_name}</td>
+                  <td className="col-md-3 text-center border-light"> <button class="btn btn-danger" onClick={() => deleteHandler(anime.id)}>Delete</button></td>
                 </tr>
               );
             })}

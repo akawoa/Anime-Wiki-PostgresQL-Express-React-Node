@@ -35,7 +35,7 @@ export const postAnimeAPICall = (data) => {
 // export const putAPICall = (url, data) => {
 //   return axios.put(url, data);
 // };
-// // API Axios Delete Call.
-// export const deleteAPICall = (url) => {
-//   return axios.delete(url);
-// };
+// API Axios Delete Call.
+export const deleteAnimeCall = (id) => {
+  return axios.delete(`http://localhost:3001/api/v1/anime/${id}`);
+};
