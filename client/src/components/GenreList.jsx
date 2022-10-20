@@ -40,6 +40,17 @@ const GenreList = (props) => {
     }
   }
 
+  const editHandler = async (id) => {
+    try {
+      const response = await deleteGenreCall(id)
+      console.log(response.status);
+      fetchData();
+    } catch (err) {
+      console.log(err);
+      <Redirect to="/error" />
+    }
+  }
+
 
   if (requestStatus === REQUEST_STATUS.LOADING) return <MyLoader></MyLoader>;
   if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
@@ -67,7 +78,12 @@ const GenreList = (props) => {
                   <td className="col-md-1 align-middle text-center border-light">{genre.genre_name}</td>
                   <td className="col-md-3 align-middle text-center border-light">{genre.genre_description}</td>
                   <td className="col-md-8 text-center border-light"><Link to={`/anime/genre/${genre.id}`}><img src={genre.genre_image} className="img-fluid rounded p-1 border border-warning bg-warning w-50"></img></Link></td>
-                  <td className="col-md-3 align-middle text-center border-light"><button class="btn btn-danger" onClick={() => deleteHandler(genre.id)}>Delete</button></td>
+                  <td className="col-md-3 align-middle text-center border-light">
+                    <div className="btn-group-vertical">
+                      <button class="btn btn-warning" onClick={() => editHandler(genre.id)}>Edit</button>
+                      <button class="btn btn-danger" onClick={() => deleteHandler(genre.id)}>Delete</button>
+                    </div>
+                    </td>
                 </tr>
               );
             })}

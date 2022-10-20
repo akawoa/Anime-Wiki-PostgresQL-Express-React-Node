@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { getAnimeCall, deleteAnimeCall } from "../apis/AnimeFinder";
+import { getAnimeCall, deleteAnimeCall, editAnimeCall } from "../apis/AnimeFinder";
 import { AnimeContext } from "../context/AnimeContext";
 import { useHistory, Link, Redirect } from "react-router-dom";
 import MyLoader from "./MyLoader";
@@ -7,6 +7,7 @@ import MyLoader from "./MyLoader";
 const AnimeList = (props) => {
   const { anime, setAnime } = useContext(AnimeContext);
   const { state, setState } = useState(false);
+  const history = useHistory();
   const REQUEST_STATUS = {
     LOADING: "loading",
     SUCCESS: "success",
@@ -35,6 +36,10 @@ const AnimeList = (props) => {
     console.log(err);
     <Redirect to="/error" />
   }
+}
+
+const editHandler = (id) => {
+  history.push(`/anime/${id}/update`);
 }
 
 
@@ -90,7 +95,12 @@ const AnimeList = (props) => {
                   <td className="col-md-3 text-center border-light">{anime.name}</td>
                   <td className="col-md-3 text-center border-light">{anime.episodes}</td>
                   <td className="col-md-3 text-center border-light"> {anime.genre_name}</td>
-                  <td className="col-md-3 text-center border-light"> <button class="btn btn-danger" onClick={() => deleteHandler(anime.id)}>Delete</button></td>
+                  <td className="col-md-3 text-center border-light">
+                    <div className="btn-group-vertical">
+                      <button class="btn btn-warning" onClick={() => editHandler(anime.id)}>Edit</button>
+                      <button class="btn btn-danger" onClick={() => deleteHandler(anime.id)}>Delete</button>
+                    </div>
+                  </td>
                 </tr>
               );
             })}
