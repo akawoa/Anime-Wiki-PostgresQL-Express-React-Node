@@ -53,12 +53,12 @@ const UpdateAnime = () => {
       setGenreName(genres.filter(genre => genre.id == genreID));
       // console.log(genreName);
 
-      setState(response.data.data.anime);
-      setName(response.data.data.anime[0].name)
-      setEpisodes(response.data.data.anime[0].episodes)
-      setImage(response.data.data.anime[0].image)
-      setYear(response.data.data.anime[0].year)
-      setCreator(response.data.data.anime[0].creator)
+      // setState(response.data.data.anime);
+      // setName(response.data.data.anime[0].name)
+      // setEpisodes(response.data.data.anime[0].episodes)
+      // setImage(response.data.data.anime[0].image)
+      // setYear(response.data.data.anime[0].year)
+      // setCreator(response.data.data.anime[0].creator)
     } catch (err) {
       setRequestStatus(REQUEST_STATUS.FAILURE);
     }
@@ -95,18 +95,18 @@ const UpdateAnime = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await editAnimeCall({
+      const response = await editAnimeCall(id, {
         name,
         episodes,
         image,
         year,
         creator,
-        genre_id: genreID
+        genre_id: genreID,
       });
       console.log(response.data.data);
       console.log(response.status);
-      addAnime(response.data.data.anime);
-      if(response.status === 201) {
+      // addAnime(response.data.data.anime);
+      if(response.status === 200) {
         history.push("/anime")
       }
     } catch (err) {
@@ -120,7 +120,7 @@ const UpdateAnime = () => {
     <div className="list-group container">
         <div className="container-fluid">
   <h3 className="font-weight-light text-left">
-  Add an Anime {anime.name}
+  Edit an Anime {anime.name}
   </h3>
   <div className="row">
     <div className="col-md-12">
@@ -192,7 +192,6 @@ const UpdateAnime = () => {
                   genres.map((genre) => {
                   return (
                     <>
-                    <option value="" disabled selected hidden>{genreName}</option>
                     <option value={genre.id} key={genre.id}>{genre.genre_name}</option>
                     </>
                   );
@@ -209,7 +208,7 @@ const UpdateAnime = () => {
         onClick={handleSubmit}
         type="submit"
         className="btn btn-primary">
-          Add Anime
+          Edit Anime
         </button>
       </form>
     </div>

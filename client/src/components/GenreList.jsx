@@ -7,6 +7,7 @@ import MyLoader from "./MyLoader";
 const GenreList = (props) => {
   const { genres, setGenres } = useContext(GenresContext);
   const { state, setState } = useState(false);
+  const history = useHistory();
   const REQUEST_STATUS = {
     LOADING: "loading",
     SUCCESS: "success",
@@ -40,15 +41,8 @@ const GenreList = (props) => {
     }
   }
 
-  const editHandler = async (id) => {
-    try {
-      const response = await deleteGenreCall(id)
-      console.log(response.status);
-      fetchData();
-    } catch (err) {
-      console.log(err);
-      <Redirect to="/error" />
-    }
+  const editHandler = (id) => {
+    history.push(`/genre/${id}/update`);
   }
 
 

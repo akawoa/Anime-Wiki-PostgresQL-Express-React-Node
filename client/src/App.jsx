@@ -7,6 +7,7 @@ import NewAnime from "./routes/NewAnime";
 import NewGenre from "./routes/NewGenre";
 import AnimeDetailPage from "./routes/AnimeDetailPage";
 import UpdatePage from "./routes/UpdatePage";
+import UpdateGenre from "./routes/UpdateGenre";
 import GenrePage from "./routes/GenrePage";
 import ErrorPage from "./routes/ErrorPage";
 import AllAnimeList from "./routes/AllAnimeList";
@@ -35,6 +36,9 @@ const App = (async) => {
             </Route>
             <Route exact path="/genre/new">
               <NewGenre />
+            </Route>
+            <Route exact path="/genre/:id/update">
+              <UpdateGenre />
             </Route>
             <Route exact path="/anime/genre/:id">
               <GenrePage />

@@ -23,13 +23,21 @@ export const getAnimeInGenre = (id) => {
 export const postGenreAPICall = (data) => {
   return axios.post(`http://localhost:3001/api/v1/genre/new`, data);
 };
+// API Axios Post Call to get a single genre.
+export const getSingleGenreCall = (id) => {
+  return axios.get(`http://localhost:3001/api/v1/genre/${id}`);
+};
+// API Axios Put Call to edit a Genre.
+export const editGenreCall = (id, data) => {
+  return axios.put(`http://localhost:3001/api/v1/genre/${id}/update`, data);
+};
 // API Axios Post Call to add an Anime.
 export const postAnimeAPICall = (data) => {
   return axios.post(`http://localhost:3001/api/v1/anime/new`, data);
 };
 // API Axios Put Call to edit an anime.
 export const editAnimeCall = (id, data) => {
-  return axios.put(`http://localhost:3001/api/v1/anime/${id}/edit`, data);
+  return axios.put(`http://localhost:3001/api/v1/anime/${id}/update`, data);
 };
 // API Axios Delete Call for an Anime.
 export const deleteAnimeCall = (id) => {

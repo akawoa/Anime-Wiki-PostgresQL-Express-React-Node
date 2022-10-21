@@ -117,6 +117,35 @@ app.post("/api/v1/anime/new", async (req, res) => {
   }
 });
 
+// Edit an Anime
+app.put("/api/v1/anime/:id/update", async (req, res) => {
+  const { id } = req.params;
+  console.log(req.body);
+
+  try {
+    const results = await db.query(
+      `UPDATE anime SET name = $1, episodes = $2, image = $3, year = $4, creator = $5, genre_id = $6 where id = ${id} returning *;`,
+      [
+        req.body.name,
+        req.body.episodes,
+        req.body.image,
+        req.body.year,
+        req.body.creator,
+        req.body.genre_id,
+      ]
+    );
+    console.log(results);
+    res.status(200).json({
+      status: "success",
+      data: {
+        anime: results.rows[0],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 //Delete an Anime
 app.delete("/api/v1/anime/:id", async (req, res) => {
   const { id } = req.params;
@@ -159,6 +188,46 @@ app.post("/api/v1/genre/new", async (req, res) => {
     );
     console.log(results);
     res.status(201).json({
+      status: "success",
+      data: {
+        genre: results.rows[0],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Get a Single Genre By ID
+app.get("/api/v1/genre/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const genreData = await db.query(`select * from genres where id = ${id};`);
+
+    res.status(200).json({
+      status: "success",
+      results: genreData.rows.length,
+      data: {
+        genre: genreData.rows,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Edit a Genre
+app.put("/api/v1/genre/:id/update", async (req, res) => {
+  const { id } = req.params;
+  console.log(req.body);
+
+  try {
+    const results = await db.query(
+      `UPDATE genres SET genre_name = $1, genre_image = $2, genre_description = $3 where id = ${id} returning *;`,
+      [req.body.genre_name, req.body.genre_image, req.body.genre_description]
+    );
+    console.log(results);
+    res.status(200).json({
       status: "success",
       data: {
         genre: results.rows[0],
