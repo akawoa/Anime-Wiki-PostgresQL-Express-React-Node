@@ -47,3 +47,7 @@ export const deleteAnimeCall = (id) => {
 export const deleteGenreCall = (id) => {
   return axios.delete(`http://localhost:3001/api/v1/genre/${id}`);
 };
+// API Axios Post Call to add a user.
+export const postUserAPICall = (data) => {
+  return axios.post(`http://localhost:3001/api/v1/user/new`, data);
+};

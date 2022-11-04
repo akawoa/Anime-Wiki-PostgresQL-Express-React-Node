@@ -2,8 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const db = require("./db");
-
 const morgan = require("morgan");
+const bcrypt = require("bcrypt");
 
 const app = express();
 
@@ -231,6 +231,33 @@ app.put("/api/v1/genre/:id/update", async (req, res) => {
       status: "success",
       data: {
         genre: results.rows[0],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Create new User
+app.post("/api/v1/user/new", async (req, res) => {
+  console.log(req.body);
+  hashedPassword = await bcrypt.hash(req.body.password, 10);
+  try {
+    const results = await db.query(
+      "INSERT INTO users (first, last, username, email, password) values ($1, $2, $3, $4, $5) returning *",
+      [
+        req.body.first,
+        req.body.last,
+        req.body.username,
+        req.body.email,
+        hashedPassword,
+      ]
+    );
+    console.log(results);
+    res.status(201).json({
+      status: "success",
+      data: {
+        user: results.rows[0],
       },
     });
   } catch (err) {

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useLocation, useParams, useHistory, Redirect } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { postGenreAPICall } from "../apis/AnimeFinder";
 import { GenresContext } from "../context/GenreContext";
 
@@ -8,114 +8,71 @@ const AddGenre = () => {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
-  const history = useHistory() 
+  const history = useHistory();
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await AnimeFinder.post("/", {
-  //       name,
-  //       location,
-  //       price_range: priceRange,
-  //     });
-  //     console.log(response.data.data);
-  //     addAnime(response.data.data.anime);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-//   CREATE TABLE IF NOT EXISTS public.genres
-// (
-//     id bigserial NOT NULL,
-//     genre_name character varying(45),
-//     genre_image text,
-//     genre_description text,
-//     created_at timestamp with time zone DEFAULT current_timestamp,
-//     updated_at timestamp with time zone DEFAULT now(),
-//     PRIMARY KEY (id)
-// );
-
-// CREATE TABLE IF NOT EXISTS public.anime
-// (
-//     id bigserial NOT NULL,
-//     name character varying(255),
-//     episodes integer,
-//     image text,
-//     year integer,
-//     creator character varying(255),
-//     genre_id bigint,
-//     created_at timestamp with time zone DEFAULT current_timestamp,
-//     updated_at timestamp with time zone DEFAULT now(),
-//     PRIMARY KEY (id)
-// );
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await postGenreAPICall({
-      genre_name: name,
-      genre_image:image,
-      genre_description: description,
-    });
-    console.log(response.data.data);
-    console.log(response.status);
-    addGenres(response.data.data.genres);
-    if(response.status === 201) {
-      history.push("/")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await postGenreAPICall({
+        genre_name: name,
+        genre_image: image,
+        genre_description: description,
+      });
+      console.log(response.data.data);
+      console.log(response.status);
+      addGenres(response.data.data.genres);
+      if (response.status === 201) {
+        history.push("/");
+      }
+    } catch (err) {
+      console.log(err);
+      <Redirect to="/error" />;
     }
-  } catch (err) {
-    console.log(err);
-    <Redirect to="/error" />
-  }
-};
+  };
 
   return (
-
-<div className="container-fluid">
-  <h3 className="font-weight-light text-left">
-  Add an Anime
-  </h3>
-  <div className="row">
-    <div className="col-md-12">
-      <form role="form">
-        <div className="form-group">
-            
-<label htmlFor="name">
-            Name
-          </label>
-          <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="form-control" />
+    <div className="container-fluid">
+      <h3 className="font-weight-light text-left">Add an Anime</h3>
+      <div className="row">
+        <div className="col-md-12">
+          <form role="form">
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="image">Image Link</label>
+              <input
+                type="text"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <textarea
+                className="form-control"
+                rows="4"
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
+            </div>
+            <button
+              onClick={handleSubmit}
+              type="submit"
+              className="btn btn-primary"
+            >
+              Add Genre
+            </button>
+          </form>
         </div>
-                    <div className="form-group">
-            <label htmlFor="image">
-                        Image Link
-                      </label>
-                      <input
-                      type="text"
-                      value={image}
-                      onChange={(e) => setImage(e.target.value)}
-                      className="form-control" />
-                    </div>
-<div className="form-group">
-<label htmlFor="description">
-            Description
-          </label>
-          <textarea className="form-control" rows="4" onChange={(e) => setDescription(e.target.value)}></textarea>
-</div>
-        <button 
-        onClick={handleSubmit}
-        type="submit"
-        className="btn btn-primary">
-          Add Genre
-        </button>
-      </form>
+      </div>
     </div>
-  </div>
-</div>
   );
 };
 
@@ -138,7 +95,7 @@ export default AddGenre;
 //   const { genres, setGenres } = useContext(GenresContext);
 //   const { state, setState } = useState(false);
 //   const { response, setResponse } = useState();
-//   const history = useHistory() 
+//   const history = useHistory()
 
 //   const fetchData = async () => {
 //     try {
@@ -176,21 +133,21 @@ export default AddGenre;
 //   }
 // };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await AnimeFinder.post("/", {
-  //       name,
-  //       location,
-  //       price_range: priceRange,
-  //     });
-  //     console.log(response.data.data);
-  //     addAnime(response.data.data.restaurant);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  //   CREATE TABLE IF NOT EXISTS public.genres
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   try {
+//     const response = await AnimeFinder.post("/", {
+//       name,
+//       location,
+//       price_range: priceRange,
+//     });
+//     console.log(response.data.data);
+//     addAnime(response.data.data.restaurant);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+//   CREATE TABLE IF NOT EXISTS public.genres
 // (
 //     id bigserial NOT NULL,
 //     genre_name character varying(45),
@@ -247,7 +204,7 @@ export default AddGenre;
 //     <div className="col-md-12">
 //       <form role="form">
 //         <div className="form-group">
-            
+
 // <label htmlFor="name">
 //             Name
 //           </label>
@@ -322,7 +279,7 @@ export default AddGenre;
 //           </label>
 //           <textarea className="form-control" rows="4"></textarea>
 // </div>
-//         <button 
+//         <button
 //         onClick={handleSubmit}
 //         type="submit"
 //         className="btn btn-primary">
