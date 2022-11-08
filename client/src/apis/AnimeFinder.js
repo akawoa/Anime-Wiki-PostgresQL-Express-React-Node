@@ -51,3 +51,8 @@ export const deleteGenreCall = (id) => {
 export const postUserAPICall = (data) => {
   return axios.post(`http://localhost:3001/api/v1/user/new`, data);
 };
+
+// API Axios Post Call to check a user for Login.
+export const getUserAPICall = (data) => {
+  return axios.post(`http://localhost:3001/api/v1/user/login`, data);
+};

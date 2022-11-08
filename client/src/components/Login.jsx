@@ -1,10 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory, Redirect } from "react-router-dom";
+import { getUserAPICall } from "../apis/AnimeFinder";
+import { UsersContext } from "../context/UserContext";
 
 const Login = () => {
-  const [first, setFirst] = useState("");
-  const [last, setLast] = useState("");
-  const [user, setUser] = useState("");
+  const { setUsers } = useContext(UsersContext);
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const [state, setState] = useState("");
+  const REQUEST_STATUS = {
+    LOADING: "loading",
+    SUCCESS: "success",
+    FAILURE: "failure",
+  };
+  const [requestStatus, setRequestStatus] = useState(REQUEST_STATUS.LOADING);
+  const history = useHistory();
+
+  const handleSubmit = async (e) => {
+    // noErrors() = true;
+    e.preventDefault();
+    try {
+      const response = await getUserAPICall({
+        username: username,
+        password: password,
+      });
+      setUsers(response.data.data.user);
+      // console.log(response.data.data.user.password);
+      // console.log(response.status);
+      // console.log("Below should be the password saved to state:");
+      // addUsers(response.data.data.user);
+      if (response.status === 201) {
+        localStorage.setItem("authenticatedUser", true);
+        history.push("/");
+      }
+    } catch (err) {
+      console.log(err);
+      <Redirect to="/error" />;
+    }
+  };
 
   return (
     <div className="container-fluid">
@@ -17,8 +51,8 @@ const Login = () => {
               <label htmlFor="creator">Username</label>
               <input
                 type="text"
-                value={user}
-                onChange={(e) => setUser(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="form-control"
               />
             </div>
@@ -33,7 +67,7 @@ const Login = () => {
               />
             </div>
             <button
-              // onClick={handleSubmit}
+              onClick={handleSubmit}
               type="submit"
               className="btn btn-primary"
             >

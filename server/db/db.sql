@@ -145,3 +145,21 @@ INNER JOIN genres ON anime.genre_id= genres.id
 
 
 select * from anime inner join genres on anime.genre_id=genres.id
+
+
+-- -----------------------------------------------------
+-- users database SQL
+-- -----------------------------------------------------
+
+    id bigint DEFAULT nextval('public.anime_id_seq'::regclass),
+    first character varying(255) NOT NULL,
+    last character varying(255) NOT NULL,
+    username character(23) NOT NULL,
+    email character varying(255) NOT NULL,
+    password character varying NOT NULL,
+    created_at time with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+        DROP TABLE public.users;
+        CONSTRAINT ALTER TABLE ONLY public.users
+        ADD CONSTRAINT username UNIQUE (username);

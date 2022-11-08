@@ -265,6 +265,42 @@ app.post("/api/v1/user/new", async (req, res) => {
   }
 });
 
+// Login an existing User
+app.post("/api/v1/user/login", async (req, res) => {
+  console.log(req.body);
+  loginPassword = req.body.password;
+  try {
+    const results = await db.query(
+      `select * from users where username = '${req.body.username}'`
+    );
+    console.log("Login Password is: " + loginPassword);
+    console.log("Password is : " + results.rows[0].password);
+    const auth = await bcrypt.compare(loginPassword, results.rows[0].password);
+    if (auth === true) {
+      console.log("Password is correct!");
+      // console.log(results);
+      res.status(201).json({
+        status: "success",
+        data: {
+          user: results.rows[0],
+        },
+      });
+    } else {
+      throw err;
+    }
+  } catch (err) {
+    // console.log(results);
+    // res.status(201).json({
+    //   status: "success",
+    //   data: {
+    //     user: results.rows[0],
+    //   },
+    // });
+    // }
+    console.log(err);
+  }
+});
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`server is up and listening on port ${port}`);
