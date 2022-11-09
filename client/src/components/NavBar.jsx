@@ -42,7 +42,7 @@ const NavBar = () => {
           </Link>
         )}
         {localStorage.getItem("authenticatedUser") != null && (
-          <Link className="navbar-brand" onClick={logout}>
+          <Link to={"/"} className="navbar-brand" onClick={logout}>
             Logout
           </Link>
         )}

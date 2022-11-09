@@ -22,7 +22,6 @@ const AnimeList = (props) => {
     try {
       const response = await getAnimeCall();
       setRequestStatus(REQUEST_STATUS.SUCCESS);
-      console.log(response.data.data.anime);
       setAnime(response.data.data.anime);
       setState(response.data.data.anime);
     } catch (err) {}
@@ -34,7 +33,6 @@ const AnimeList = (props) => {
   const deleteHandler = async (id) => {
     try {
       const response = await deleteAnimeCall(id);
-      console.log(response.status);
       fetchData();
     } catch (err) {
       console.log(err);
@@ -46,36 +44,11 @@ const AnimeList = (props) => {
     history.push(`/anime/${id}/update`);
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await postAnimeAPICall({
-  //       name,
-  //       episodes,
-  //       image,
-  //       year,
-  //       creator,
-  //       genre_id: genreID
-  //     });
-  //     console.log(response.data.data);
-  //     console.log(response.status);
-  //     addAnime(response.data.data.anime);
-  //     if(response.status === 201) {
-  //       console.log('The response is equal to 201');
-  //       history.push("/anime")
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //     <Redirect to="/error" />
-  //   }
-  // };
-
   if (requestStatus === REQUEST_STATUS.LOADING) return <MyLoader></MyLoader>;
   if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
 
   return (
-    <div className="list-group container">
-      Anime List Component
+    <div className="list-group">
       <table className="table-active table-bordered table-striped table-hover table-dark table-sm">
         <thead>
           <tr className="bg-secondary text-warning">

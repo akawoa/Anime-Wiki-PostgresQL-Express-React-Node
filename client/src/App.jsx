@@ -19,10 +19,10 @@ import { UsersContextProvider } from "./context/UserContext";
 
 const App = (async) => {
   return (
-    <AnimeContextProvider>
-      <GenresContextProvider>
-        <UsersContextProvider>
-          <div className="container">
+    <div className="fill-window">
+      <AnimeContextProvider>
+        <GenresContextProvider>
+          <UsersContextProvider>
             <BrowserRouter>
               <Switch>
                 <Route exact path="/">
@@ -60,10 +60,10 @@ const App = (async) => {
                 </Route>
               </Switch>
             </BrowserRouter>
-          </div>
-        </UsersContextProvider>
-      </GenresContextProvider>
-    </AnimeContextProvider>
+          </UsersContextProvider>
+        </GenresContextProvider>
+      </AnimeContextProvider>
+    </div>
   );
 };
 

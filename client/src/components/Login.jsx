@@ -26,12 +26,10 @@ const Login = () => {
         password: password,
       });
       setUsers(response.data.data.user);
-      // console.log(response.data.data.user.password);
-      // console.log(response.status);
-      // console.log("Below should be the password saved to state:");
-      // addUsers(response.data.data.user);
       if (response.status === 201) {
         localStorage.setItem("authenticatedUser", true);
+        localStorage.setItem("first_name", response.data.data.user.first);
+        localStorage.setItem("last_name", response.data.data.user.last);
         history.push("/");
       }
     } catch (err) {

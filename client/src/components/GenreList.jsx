@@ -19,7 +19,6 @@ const GenreList = (props) => {
     try {
       const response = await getGenreCall();
       setRequestStatus(REQUEST_STATUS.SUCCESS);
-      console.log(response.data.data);
       setGenres(response.data.data.genre);
       setState(response.data.data);
     } catch (err) {
@@ -33,7 +32,6 @@ const GenreList = (props) => {
   const deleteHandler = async (id) => {
     try {
       const response = await deleteGenreCall(id);
-      console.log(response.status);
       fetchData();
     } catch (err) {
       console.log(err);
@@ -49,8 +47,7 @@ const GenreList = (props) => {
   if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
 
   return (
-    <div className="list-group container">
-      Genre List Component
+    <div className="list-group">
       <table className="table table-bordered table-striped table-hover table-dark table-sm">
         <thead>
           <tr className="bg-secondary text-warning">
@@ -93,13 +90,13 @@ const GenreList = (props) => {
                     <td className="col-md-3 align-middle text-center border-light">
                       <div className="btn-group-vertical">
                         <button
-                          class="btn btn-warning"
+                          className="btn btn-warning"
                           onClick={() => editHandler(genre.id)}
                         >
                           Edit
                         </button>
                         <button
-                          class="btn btn-danger"
+                          className="btn btn-danger"
                           onClick={() => deleteHandler(genre.id)}
                         >
                           Delete
