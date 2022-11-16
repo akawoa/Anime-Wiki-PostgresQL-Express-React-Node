@@ -21,7 +21,9 @@ const AnimeList = (props) => {
   const fetchData = async () => {
     try {
       const response = await getAnimeCall();
-      setRequestStatus(REQUEST_STATUS.SUCCESS);
+      setTimeout(() => {
+        setRequestStatus(REQUEST_STATUS.SUCCESS);
+      }, 1000);
       setAnime(response.data.data.anime);
       setState(response.data.data.anime);
     } catch (err) {}
