@@ -28,6 +28,18 @@
   color: #61dafb;
 }
 
+.navLink{
+  background-color: #FFA500;
+  transition-duration: .5s;
+  color: white;
+}
+
+.navLink:hover{
+  background-color: #737373;
+  transition-duration: .5s;
+  color: #FFA500;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
