@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import SearchBar from "../components/SearchBar";
 
 const NavBar = () => {
   const history = useHistory();
@@ -13,9 +14,10 @@ const NavBar = () => {
   };
 
   return (
-    <div>
-<nav className="navbar" style={{backgroundColor: "#737373"}}>
-  <div id="navbarSupportedContent">
+    <div className="container-fullwidth">
+<nav className="navbar-expand-lg" style={{backgroundColor: "#737373"}}>
+  <div className="row align-items-start" id="navbarSupportedContent">
+  <div className="col-6 ">
         <Link to={"/"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink">
           Home
         </Link>
@@ -47,7 +49,12 @@ const NavBar = () => {
             Logout
           </Link>
         )}
-              </div>
+        </div>
+        <div className="col-6 col-xs-4">
+        <SearchBar></SearchBar>
+        </div>
+          </div>
+            
 </nav>
 </div>
 
