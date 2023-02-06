@@ -47,8 +47,9 @@ const GenreList = (props) => {
   if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
 
   return (
-    <div className="list-group">
-      <table className="table table-bordered table-striped table-hover table-dark table-sm">
+    <div id="margin">
+    {/* <div className="list-group" id="margin"> */}
+      <table className="table table-bordered table-striped table-hover table-dark table-sm" id="margin">
         <thead>
           <tr className="bg-secondary text-warning">
             <th scope="col" className="col-md-4-4 text-center border-light">

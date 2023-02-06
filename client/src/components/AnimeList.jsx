@@ -50,6 +50,7 @@ const AnimeList = (props) => {
   if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
 
   return (
+    <div id="margin">
     <div className="list-group">
       <table className="table-active table-bordered table-striped table-hover table-dark table-sm">
         <thead>
@@ -119,6 +120,7 @@ const AnimeList = (props) => {
             })}
         </tbody>
       </table>
+    </div>
     </div>
   );
 };

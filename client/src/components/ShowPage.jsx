@@ -41,8 +41,7 @@ const ShowPage = (props) => {
   if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
 
   return (
-    <div className="list-group container">
-        Anime Show Page Component
+    <div className="list-group" id="margin">
         <table className="table-active table-bordered table-striped table-hover table-dark table-sm">
         <thead>
           <tr className="bg-secondary text-warning">

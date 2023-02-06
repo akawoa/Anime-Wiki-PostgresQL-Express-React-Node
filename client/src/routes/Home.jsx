@@ -10,7 +10,6 @@ const Home = () => {
       <NavBar />
       <Header />
       <GenreList />
-      <AnimeList />
     </div>
   );
 };
