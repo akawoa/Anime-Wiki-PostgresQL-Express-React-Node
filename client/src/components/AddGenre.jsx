@@ -8,6 +8,9 @@ const AddGenre = () => {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
+  const [genreNameError, setGenreNameError] = useState("");
+  const [genreImageError, setGenreImageError] = useState("");
+  const [genreDescriptionError, setGenreDescriptionError] = useState("");
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -30,6 +33,37 @@ const AddGenre = () => {
     }
   };
 
+  const handleGenreName = (e) => {
+    setName(e.target.value);
+    if (e.target.value.length < 1) {
+      setGenreNameError("Genre Name is Required!");
+    } else if (e.target.value.length < 2) {
+      setGenreNameError("Genre Name must be 2 characters or longer!");
+    } else if (e.target.value.length >= 2) {
+      setGenreNameError("");
+    }
+  };
+
+  const handleGenreImage = (e) => {
+    setImage(e.target.value);
+    if (e.target.value.toLowerCase().includes(".com") == false ) {
+      setGenreImageError("Please enter a valid url!");
+    } else if (e.target.value.toLowerCase().includes(".com") == true ) {
+      setGenreImageError("");
+    }
+  };
+
+    const handleGenreDescription = (e) => {
+    setDescription(e.target.value);
+    if (e.target.value.length < 1) {
+      setGenreDescriptionError("Genre Description is Required!");
+    } else if (e.target.value.length < 2) {
+      setGenreDescriptionError("Genre Description must be 2 characters or longer!");
+    } else if (e.target.value.length >= 2) {
+      setGenreDescriptionError("");
+    }
+  };
+
   return (
     <div className="container-fluid">
       <h3 className="font-weight-light text-left">Add an Anime</h3>
@@ -41,27 +75,32 @@ const AddGenre = () => {
               <input
                 type="text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleGenreName}
                 className="form-control"
               />
             </div>
+            <span className="text-danger">{genreNameError}</span>
             <div className="form-group">
               <label htmlFor="image">Image Link</label>
               <input
                 type="text"
                 value={image}
-                onChange={(e) => setImage(e.target.value)}
+                onChange={handleGenreImage}
                 className="form-control"
               />
+              <span className="text-danger">{genreImageError}</span>
             </div>
             <div className="form-group">
               <label htmlFor="description">Description</label>
               <textarea
                 className="form-control"
                 rows="4"
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={handleGenreDescription}
               ></textarea>
             </div>
+            <span className="text-danger">{genreDescriptionError}</span>
+            <br></br>
+            <br></br>
             <button
               onClick={handleSubmit}
               type="submit"

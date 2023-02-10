@@ -10,6 +10,7 @@ const NavBar = () => {
 
   const logout = () => {
     localStorage.clear();
+    history.push('/login/');
     window.location.reload();
   };
 
@@ -45,12 +46,12 @@ const NavBar = () => {
           </Link>
         )}
         {localStorage.getItem("authenticatedUser") != null && (
-          <Link to={"/"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink">
+          <Link to={"/"} onClick={logout} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink">
             Logout
           </Link>
         )}
         </div>
-        <div className="col-6 col-xs-4">
+        <div className="col-6 ">
         <SearchBar></SearchBar>
         </div>
           </div>

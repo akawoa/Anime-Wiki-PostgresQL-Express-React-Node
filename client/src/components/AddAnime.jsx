@@ -87,33 +87,28 @@ const AddAnime = () => {
     setEpisodes(e.target.value);
     if (e.target.value.length < 1) {
       setEpisodesError("Number of episodes is Required!");
-    } else if (e.target.value.length < 2) {
-      setEpisodesError(
-        "First Name must be a valid number characters or longer!"
-      );
-    } else if (e.target.value.length >= 2) {
+    } else if (e.target.value.length >= 1) {
       setEpisodesError("");
     }
   };
 
   const handleImage = (e) => {
     setImage(e.target.value);
-    if (e.target.value.length < 1) {
-      setImageError("First Name is Required!");
-    } else if (e.target.value.length < 2) {
-      setImageError("First Name must be 2 characters or longer!");
-    } else if (e.target.value.length >= 2) {
+    if (e.target.value.toLowerCase().includes(".com") == false ) {
+      setImageError("Please enter a valid url!");
+    } else if (e.target.value.toLowerCase().includes(".com") == true ) {
       setImageError("");
     }
   };
 
   const handleYear = (e) => {
-    setYear(e.target.value);
+    const limit = 4;
+    setYear(e.target.value.slice(0, limit));
     if (e.target.value == null) {
       setYearError("Anime Year is Required!");
     } else if (e.target.value < 1900) {
-      setYearError("Anime must have a valid year!");
-    } else if (e.target.value >= 1900) {
+      setYearError("Anime must have a valid creation year!");
+    } else if ((e.target.value >= 1900) && (e.target.value <= 2100)) {
       setYearError("");
     }
   };
@@ -121,9 +116,9 @@ const AddAnime = () => {
   const handleCreator = (e) => {
     setCreator(e.target.value);
     if (e.target.value.length < 1) {
-      setCreatorError("First Name is Required!");
+      setCreatorError("Creator is Required!");
     } else if (e.target.value.length < 2) {
-      setCreatorError("First Name must be 2 characters or longer!");
+      setCreatorError("Creator must be 2 characters or longer!");
     } else if (e.target.value.length >= 2) {
       setCreatorError("");
     }
@@ -178,7 +173,7 @@ const AddAnime = () => {
                 type="number"
                 value={year}
                 min="4"
-                maxlength="4"
+                maxlength={5}
                 required
                 onChange={handleYear}
                 className="form-control"

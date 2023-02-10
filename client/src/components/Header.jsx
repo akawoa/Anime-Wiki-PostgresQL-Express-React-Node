@@ -5,9 +5,9 @@ const Header = () => {
     <div style={{backgroundColor: "#FFA500"}}>
       <h1 className="font-weight-normal text-light display-1 text-center">Anime Wiki</h1>
       {localStorage.getItem("authenticatedUser") != null && (
-        <h2 className="font-weight-light text-center">
+        <h1 className="font-weight-light text-center">
           Greetings {localStorage.getItem("first_name")}!
-        </h2>
+        </h1>
       )}
     </div>
   );
