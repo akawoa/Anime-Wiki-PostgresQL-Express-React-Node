@@ -5,39 +5,35 @@ import { useHistory, useParams, Redirect, Link } from "react-router-dom";
 import MyLoader from "./MyLoader";
 
 const SearchBar = (props) => {
-    const { id } = useParams();
-  const { search, setSearch } = "";
+  const [search, setSearch] = useState("");
   let history = useHistory();
-  const REQUEST_STATUS = {
-    LOADING: "loading",
-    SUCCESS: "success",
-    FAILURE: "failure",
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
   };
-  const [requestStatus, setRequestStatus] = useState(REQUEST_STATUS.LOADING);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await getAnimeInGenre(id);
-  //       setRequestStatus(REQUEST_STATUS.SUCCESS);
-  //       console.log(response.data.data);
-  //       setAnime(response.data.data.anime);
-  //     } catch (err) {
-  //       setRequestStatus(REQUEST_STATUS.FAILURE);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+  const handleSubmit = (search) => {
+    // e.preventDefault(); 
+    if (!search) {
+      return;
+    }
+    window.location.href=(`/anime/search/${search}`);
+      <Redirect to={`/anime/search/${search}`} />;
+    };
 
-  // if (requestStatus === REQUEST_STATUS.LOADING) return <MyLoader></MyLoader>;
-  // if (requestStatus === REQUEST_STATUS.FAILURE) <Redirect to="/error" />;
+  const handleKeyPress = (e) => {
+    // console.log(`The keyboard key that was pressed was: ${e.keyCode}`);
+    if (e.keyCode === 13) {
+      handleSubmit(search);
+    }
+}
 
   return (
     <div className="">
-<div class="input-group rounded w-50s">
-  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-  <span class="input-group-text border-0 navLink" id="search-addon">
-    <i class="fas fa-search"></i>
+<div className="input-group rounded w-50s">
+  <input type="search" className="form-control rounded" onChange={handleSearch} onKeyDown={handleKeyPress} placeholder="Search" aria-label="Search" aria-describedby="search-addon" tabindex='0' />
+  <span className="input-group-text border-0 navLink" id="search-addon">
+  <Link to={`/anime/search/${search}`}><i className="fas fa-search" onClick={handleSubmit}></i></Link>
   </span>
 </div>
 </div>

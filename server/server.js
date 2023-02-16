@@ -30,6 +30,27 @@ app.get("/api/v1/anime", async (req, res) => {
   }
 });
 
+// Partial Search of Anime
+app.get("/api/v1/search/:search", async (req, res) => {
+  const { search } = req.params;
+  // console.log(search);
+  try {
+    const animeData = await db.query(
+      `select anime.id as id, name as name, episodes as episodes, image as image, year as year, creator as creator, genre_id as genre_id, genre_name as genre_name from anime LEFT JOIN genres ON anime.genre_id=genres.id where LOWER(anime.name) like '%${search}%' ORDER BY name ASC;`
+    );
+
+    res.status(200).json({
+      status: "success",
+      results: animeData.rows.length,
+      data: {
+        anime: animeData.rows,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 // Get all Genres
 app.get("/api/v1/anime/genre", async (req, res) => {
   try {
@@ -58,7 +79,6 @@ app.get("/api/v1/anime/genre/:id", async (req, res) => {
       `select anime.id as id, name as name, episodes as episodes, image as image, year as year, creator as creator, genre_id as genre_id, genre_name as genre_name from anime LEFT JOIN genres ON anime.genre_id=genres.id WHERE anime.genre_id = ${id} ORDER BY name ASC;`
       // `select * from anime  LEFT JOIN genres ON anime.genre_id = genres.id WHERE anime.genre_id = ${id};`
     );
-
     res.status(200).json({
       status: "success",
       results: genreAnimeData.rows.length,

@@ -13,9 +13,11 @@ import UpdateGenre from "./routes/UpdateGenre";
 import GenrePage from "./routes/GenrePage";
 import ErrorPage from "./routes/ErrorPage";
 import AllAnimeList from "./routes/AllAnimeList";
+import SearchResultsPage from "./routes/SearchResultsPage";
 import { AnimeContextProvider } from "./context/AnimeContext";
 import { GenresContextProvider } from "./context/GenreContext";
 import { UsersContextProvider } from "./context/UserContext";
+
 
 const App = (async) => {
   return (
@@ -36,6 +38,9 @@ const App = (async) => {
                 </Route>
                 <Route exact path="/anime">
                   <AllAnimeList />
+                </Route>
+                <Route exact path="/anime/search/:search">
+                  <SearchResultsPage />
                 </Route>
                 <Route exact path="/anime/new">
                   <NewAnime />

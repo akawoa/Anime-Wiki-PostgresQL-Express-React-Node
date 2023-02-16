@@ -19,34 +19,34 @@ const NavBar = () => {
 <nav className="navbar-expand-lg" style={{backgroundColor: "#737373"}}>
   <div className="row align-items-start" id="navbarSupportedContent">
   <div className="col-6 ">
-        <Link to={"/"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink">
+        <Link to={"/"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink" tabindex='-1'>
           Home
         </Link>
         {localStorage.getItem("authenticatedUser") != null && (
-          <Link to={"/anime/new"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink">
+          <Link to={"/anime/new"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink" tabindex='-1'>
             New Anime
           </Link>
         )}
         {localStorage.getItem("authenticatedUser") != null && (
-          <Link to={"/genre/new"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink">
+          <Link to={"/genre/new"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink" tabindex='-1'>
             New Genre
           </Link>
         )}
-        <Link to={"/anime/"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink">
+        <Link to={"/anime/"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink" tabindex='-1'>
           All Anime
         </Link>
         {localStorage.getItem("authenticatedUser") == null && (
-          <Link to={"/register/"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink">
+          <Link to={"/register/"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink" tabindex='-1'>
             Register
           </Link>
         )}
         {localStorage.getItem("authenticatedUser") == null && (
-          <Link to={"/login/"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink">
+          <Link to={"/login/"} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink" tabindex='-1'>
             Login
           </Link>
         )}
         {localStorage.getItem("authenticatedUser") != null && (
-          <Link to={"/"} onClick={logout} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink">
+          <Link to={"/"} onClick={logout} className="navbar-brand font-weight-bold shadow-sm p-3 mb-5 rounded navLink" tabindex='-1'>
             Logout
           </Link>
         )}
